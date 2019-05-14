@@ -1,103 +1,13 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style> /* set the CSS */
-
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 2px;
-}
-
-</style>
-<body>
-
-<!-- load the d3.js library -->    	
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script>
-//TEST
-// set the dimensions and margins of the graph
-var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-// parse the date / time
-var parseTime = d3.timeParse("%d-%b-%y");
-
-// set the ranges
-var x = d3.scaleTime().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
-
-// define the 1st line
-var valueline = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.close); });
-
-// define the 2nd line
-var valueline2 = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.open); });
-	
-// define the 3rd line
-var valueline3 = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.open); });
-	
-// append the svg obgect to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
-// Get the data
-d3.csv("data2.csv", function(error, data) {
-  if (error) throw error;
-
-  // format the data
-  data.forEach(function(d) {
-      d.date = parseTime(d.date);
-      d.close = +d.close;
-      d.open = +d.open;
-  });
-
-  // Scale the range of the data
-  x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) {
-	  return Math.max(d.close, d.open); })]);
-
-  // Add the valueline path.
-  svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .attr("d", valueline);
-
-  // Add the valueline2 path.
-  svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .style("stroke", "red")
-      .attr("d", valueline2);
-
-  // Add the valueline3 path.
-  svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .style("stroke", "red")
-      .attr("d", valueline3);	
-	
-  // Add the X Axis
-  svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-
-  // Add the Y Axis
-  svg.append("g")
-      .call(d3.axisLeft(y));
-
-});
-
-</script>
-</body>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="26px" height="26px" viewBox="0 0 26 26" enable-background="new 0 0 26 26" xml:space="preserve">  <image id="image0" width="26" height="26" x="0" y="0"
+    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAQAAAADQ4RFAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZ
+cwAAEnMAABJzAYwiuQcAAAAHdElNRQfjBQ4DJRcdXdC2AAAAx0lEQVQ4y6WTyRHEIAwEmy3CQfkH
+ooBmHzY32Gzt+AEFap04JAF44EgmAJIkKSlJvH3ZNl4evHrBQ96N8nuNAAZ4OTL5OrXbDj7FO0Z2
+sFOuPLYHprz6Ik5t1qf3dF14sAdkgFrctsgWajGbpriFnvQPtBvnWhHqezh9gXVOP4D9nPAm0Xla
+20aM2AqMPGqd7ALqYx1C9b/ZteZluH1rDqEx3WPosKa1TLnakNQWXgyGlljZGxBEfq6dQRi9tzdB
+XXiYWzxP7Qt17GbxNVoaOAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxOS0wNS0xNFQwMzozNzoyMysw
+MzowMB6DtMkAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTktMDUtMTRUMDM6Mzc6MjMrMDM6MDBv3gx1
+AAAAGXRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjEzNANbegAAAABJRU5ErkJggg==" />
+</svg>
